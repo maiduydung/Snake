@@ -58,32 +58,32 @@ void draw() {
 
 
 void logic() {
-	if (_kbhit())
-	{
-		switch (_getch()) 
-		{
-			case 'a':
-				dir = LEFT;
-				break;
-			case 's':
-				dir = DOWN;
-				break;
-			case 'd':
-				dir = RIGHT;
-				break;
-			case 'w':
-				dir = UP;
-				break;
-			case 'z':
-				gameover = TRUE;
-				break;
-		}
-	}
+
 
 }
 
 void input() {
-
+	    if (_kbhit())
+    {
+        switch (_getch())
+        {
+        case 'a':
+            dir = LEFT;
+            break;
+        case 'd':
+            dir = RIGHT;
+            break;
+        case 'w':
+            dir = UP;
+            break;
+        case 's':
+            dir = DOWN;
+            break;
+        case 'x':
+            gameOver = true;
+            break;
+        }
+    }
 }
 
 
