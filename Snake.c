@@ -1,6 +1,9 @@
+
+#include "stdafx.h"
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
+
 
 using namespace std;
 
@@ -17,7 +20,7 @@ eDirecton dir;
 void setup() {
 	gameover = false;
 	dir = STOP;
-	
+
 	x = width / 2; //center
 	y = width / 2;
 
@@ -42,13 +45,13 @@ void draw() {
 				cout << "@";
 			}
 			else if (i == x && j == y) // printing the snake head
-				{
-					cout << "o";
-				}
-			else if (i == food_x && j == food_y) 
-				{
+			{
+				cout << "o";
+			}
+			else if (i == food_x && j == food_y)
+			{
 				cout << "x";
-				}
+			}
 
 			else
 				cout << " ";
@@ -58,32 +61,62 @@ void draw() {
 
 
 void logic() {
+	switch (dir)
+	{
+	case LEFT:
+		y--;
+		break;
+	case RIGHT:
+		y++;
+		break;
+	case UP:
+		x--;
+		break;
+	case DOWN:
+		x++;
+		break;
+	default:
+		break;
+	}
+	
+	if (x > width || x < 0 || y > height || y < 0)
+	{
+		gameover = true;
+	}
 
+	if (x == food_x && y == food_y)
+	{
+		score = score + 10;
+		food_x = rand() % width;
+		food_y = rand() % height;
+	}
 
 }
 
-void input() {
-	    if (_kbhit())
-    {
-        switch (_getch())
-        {
-        case 'a':
-            dir = LEFT;
-            break;
-        case 'd':
-            dir = RIGHT;
-            break;
-        case 'w':
-            dir = UP;
-            break;
-        case 's':
-            dir = DOWN;
-            break;
-        case 'x':
-            gameOver = true;
-            break;
-        }
-    }
+void input()
+{
+	if (_kbhit())
+	{
+		switch (_getch())
+		{
+		case 'a':
+			dir = LEFT;
+			break;
+		case 'd':
+			dir = RIGHT;
+			break;
+		case 'w':
+			dir = UP;
+			break;
+		case 's':
+			dir = DOWN;
+			break;
+		case 'z':
+			gameover = true;
+			break;
+		}
+	}
+
 }
 
 
@@ -112,7 +145,7 @@ int main() {
 		draw();
 		input();
 		logic();
-		Sleep(10);
+		Sleep(200);
 	}
 
 	return 0;
